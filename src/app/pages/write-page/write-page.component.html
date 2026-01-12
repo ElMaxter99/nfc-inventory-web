@@ -1,5 +1,5 @@
 <section class="page">
-  <div class="status-card">
+  <div class="status-card write-status">
     <p class="status-label">{{ statusMessage() }}</p>
     @if (errorMessage()) {
       <p class="status-error">{{ errorMessage() }}</p>
@@ -14,7 +14,12 @@
     <input type="url" [(ngModel)]="urlValue" placeholder="https://ejemplo.com" />
   </label>
 
-  <button class="primary-button" type="button" (click)="writeTag()" [disabled]="!canWrite()">
+  <button
+    class="primary-button write-button"
+    type="button"
+    (click)="writeTag()"
+    [disabled]="!canWrite()"
+  >
     Escribir en etiqueta
   </button>
 
