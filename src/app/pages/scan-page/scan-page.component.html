@@ -1,0 +1,74 @@
+<section class="page">
+  <div class="status-card">
+    <p class="status-label">{{ statusMessage() }}</p>
+    @if (errorMessage()) {
+      <p class="status-error">{{ errorMessage() }}</p>
+    }
+    @if (scanResult()) {
+      <div class="scan-result">
+        <div>
+          <span class="result-title">Valor leído</span>
+          <p class="result-value">{{ scanResult()?.bestValue || 'Sin datos' }}</p>
+          <span class="result-type">Tipo: {{ scanResult()?.bestValueType }}</span>
+        </div>
+        <div>
+          <span class="result-title">URL destino</span>
+          <p class="result-value">{{ destinationUrl() }}</p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <button class="primary-button" type="button" (click)="startScan()" [disabled]="isScanning()">
+    {{ isScanning() ? 'Escaneando…' : 'Escanear NFC' }}
+  </button>
+
+  <button
+    class="secondary-button"
+    type="button"
+    (click)="openDestination()"
+    [disabled]="!hasDestination()"
+  >
+    Abrir
+  </button>
+
+  @if (!isSupported()) {
+    <section class="fallback">
+      <h3>Alternativas en iPhone/Safari</h3>
+      <ul>
+        <li><strong>Abrir URL manual:</strong> pega una URL y ábrela.</li>
+        <li><strong>Escanear QR:</strong> placeholder listo para integrar lector.</li>
+        <li>
+          <strong>Modo lectura limitada:</strong> solo se abrirá una URL si la etiqueta ya la
+          contiene.
+        </li>
+      </ul>
+
+      <label class="input-label">
+        Abrir URL manual
+        <input type="url" [(ngModel)]="manualUrl" placeholder="https://ejemplo.com" />
+      </label>
+      @if (manualError()) {
+        <p class="status-error">{{ manualError() }}</p>
+      }
+      <button class="secondary-button" type="button" (click)="openManualUrl()">
+        Abrir URL
+      </button>
+
+      <div class="qr-placeholder">
+        <strong>Escanear QR</strong>
+        <p>Placeholder listo para integrar lector de QR en navegador.</p>
+      </div>
+    </section>
+  }
+
+  <section class="limitations">
+    <details>
+      <summary>Limitaciones iPhone</summary>
+      <p>
+        En iOS/Safari, Web NFC no permite escribir etiquetas. Solo se puede abrir una URL ya
+        existente en la etiqueta. Usa las alternativas si no detecta la etiqueta.
+      </p>
+    </details>
+  </section>
+</section>
