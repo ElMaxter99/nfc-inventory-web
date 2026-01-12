@@ -1,5 +1,5 @@
 <section class="page">
-  <div class="status-card">
+  <div class="status-card scan-status">
     <p class="status-label">{{ statusMessage() }}</p>
     @if (errorMessage()) {
       <p class="status-error">{{ errorMessage() }}</p>
@@ -19,12 +19,17 @@
     }
   </div>
 
-  <button class="primary-button" type="button" (click)="startScan()" [disabled]="isScanning()">
+  <button
+    class="primary-button scan-button"
+    type="button"
+    (click)="startScan()"
+    [disabled]="isScanning()"
+  >
     {{ isScanning() ? 'Escaneando…' : 'Escanear NFC' }}
   </button>
 
   <button
-    class="secondary-button"
+    class="secondary-button secondary-pill"
     type="button"
     (click)="openDestination()"
     [disabled]="!hasDestination()"
