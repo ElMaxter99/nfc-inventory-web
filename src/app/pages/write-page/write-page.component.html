@@ -1,0 +1,40 @@
+<section class="page">
+  <div class="status-card">
+    <p class="status-label">{{ statusMessage() }}</p>
+    @if (errorMessage()) {
+      <p class="status-error">{{ errorMessage() }}</p>
+    }
+    @if (successMessage()) {
+      <p class="status-success">{{ successMessage() }}</p>
+    }
+  </div>
+
+  <label class="input-label">
+    URL a escribir
+    <input type="url" [(ngModel)]="urlValue" placeholder="https://ejemplo.com" />
+  </label>
+
+  <button class="primary-button" type="button" (click)="writeTag()" [disabled]="!canWrite()">
+    Escribir en etiqueta
+  </button>
+
+  @if (!canWrite()) {
+    <section class="fallback">
+      <h3>Modo escritura limitada</h3>
+      <p>
+        En iPhone/Safari la escritura NFC no está soportada desde navegador. Usa Android o
+        Chrome compatible para escribir.
+      </p>
+    </section>
+  }
+
+  <section class="limitations">
+    <details>
+      <summary>Limitaciones iPhone</summary>
+      <p>
+        iOS solo permite lectura NFC limitada en web. Para escribir etiquetas necesitas Android
+        con navegador compatible. Esta sección mostrará alternativas próximamente.
+      </p>
+    </details>
+  </section>
+</section>

@@ -1,0 +1,16 @@
+{
+  "name": "NFC QuickTap",
+  "short_name": "NFC QuickTap",
+  "theme_color": "#111827",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/scan",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

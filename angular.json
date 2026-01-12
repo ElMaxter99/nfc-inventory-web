@@ -31,7 +31,8 @@
             ],
             "styles": [
               "src/styles.scss"
-            ]
+            ],
+            "serviceWorker": false
           },
           "configurations": {
             "production": {
@@ -47,12 +48,42 @@
                   "maximumError": "8kB"
                 }
               ],
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "serviceWorker": "ngsw-config.json"
+            },
+            "pre": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.pre.ts"
+                }
+              ],
+              "serviceWorker": "ngsw-config.json",
               "outputHashing": "all"
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ],
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "serviceWorker": false
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "serviceWorker": false
             }
           },
           "defaultConfiguration": "production"
@@ -62,6 +93,12 @@
           "configurations": {
             "production": {
               "buildTarget": "nfc-inventory-web:build:production"
+            },
+            "pre": {
+              "buildTarget": "nfc-inventory-web:build:pre"
+            },
+            "local": {
+              "buildTarget": "nfc-inventory-web:build:local"
             },
             "development": {
               "buildTarget": "nfc-inventory-web:build:development"
@@ -94,5 +131,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
